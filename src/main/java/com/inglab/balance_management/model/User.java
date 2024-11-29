@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -35,6 +36,17 @@ public class User implements UserDetails {
     private boolean verified;
     private String otp;
     private LocalDateTime otpExpiry;
+    @OneToMany(mappedBy = "user")
+    private List<IncomeCategory> incomeCategories;
+
+    @OneToMany(mappedBy = "user")
+    private List<ExpenseCategory> expenseCategories;
+
+    @OneToMany(mappedBy = "user")
+    private List<Incomes> incomes;
+
+    @OneToMany(mappedBy = "user")
+    private List<Expenses> expenses;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))

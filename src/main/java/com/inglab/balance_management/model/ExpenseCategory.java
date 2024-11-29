@@ -3,28 +3,26 @@ package com.inglab.balance_management.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.List;
+
 
 @Entity
 @Data
-@Table(name = "expenses")
-public class Expenses {
+@Table(name = "expense_category")
+public class ExpenseCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal amount;
-    private LocalDate date;
+    private String name;
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private ExpenseCategory expenseCategory;
+    @OneToMany(mappedBy = "expenseCategory")
+    private List<Expenses> expenses;
 
 }

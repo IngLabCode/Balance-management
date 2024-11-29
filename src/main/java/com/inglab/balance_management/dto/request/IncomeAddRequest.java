@@ -1,5 +1,7 @@
 package com.inglab.balance_management.dto.request;
 
+import com.inglab.balance_management.model.IncomeCategory;
+import com.inglab.balance_management.model.User;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -23,4 +25,5 @@ public class IncomeAddRequest {
     @NotBlank(message = "Category is required")
     @Size(max = 100, message = "Category must not exceed 100 characters")
     private String category;
+
 }
