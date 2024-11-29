@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
@@ -31,6 +32,9 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
+    private boolean verified;
+    private String otp;
+    private LocalDateTime otpExpiry;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))

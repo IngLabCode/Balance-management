@@ -1,11 +1,12 @@
 package com.inglab.balance_management.service.impl;
 
 import com.inglab.balance_management.dto.request.AuthenticationRequest;
+import com.inglab.balance_management.model.User;
 import com.inglab.balance_management.repository.UserRepository;
 import com.inglab.balance_management.dto.request.RegisterRequest;
 import com.inglab.balance_management.dto.response.AuthenticationResponse;
 import com.inglab.balance_management.enums.Role;
-import com.inglab.balance_management.model.User;
+import com.inglab.balance_management.service.inter.OTPServiceInter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,8 +23,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
-
+    private final OTPServiceInter otpServiceInter;
 
 
     public AuthenticationResponse register(RegisterRequest request) {
@@ -47,11 +47,13 @@ public class AuthenticationService {
                 .build();
 
         repository.save(user);
+        otpServiceInter.generateAndSendOTP(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

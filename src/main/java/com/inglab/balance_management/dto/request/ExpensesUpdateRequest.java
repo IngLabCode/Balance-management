@@ -1,19 +1,21 @@
 package com.inglab.balance_management.dto.request;
 
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
 
-public record ExpensesUpdateRequest(Integer amount,
-                                 LocalDateTime date,
-                                 String description,
-                                 String paymentMethod) {
+import java.time.LocalDate;
 
-    public static ExpensesUpdateRequest of(Integer amount, String description, String paymentMethod) {
-        return new ExpensesUpdateRequest(amount, LocalDateTime.now(), description, paymentMethod);
-    }
+@Data
+public class ExpensesUpdateRequest {
 
-    public ExpensesUpdateRequest {
-        if (amount != null && amount < 0) {
-            throw new IllegalArgumentException("Amount cannot be negative");
-        }
-    }
+    @Positive(message = "Amount must be greater than zero")
+    private Double amount;
+
+    @FutureOrPresent(message = "Date must be in the present or future")
+    private LocalDate date;
+
+    @Size(max = 255, message = "Description must not exceed 255 characters")
+    private String description;
 }

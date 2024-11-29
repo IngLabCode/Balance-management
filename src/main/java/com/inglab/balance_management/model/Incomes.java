@@ -1,13 +1,13 @@
 package com.inglab.balance_management.model;
 
-import com.inglab.balance_management.model.User;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
-
 @Entity
+@Data
 @Table(name = "income")
-public class Income {
+public class Incomes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,14 +15,5 @@ public class Income {
     private Double amount;
     private LocalDate date;
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-//    @ManyToOne
-//    @JoinColumn(name = "category_id", nullable = false)
-//    private IncomeCategory category;
-
-    // Getters və Setters
+    private String category;
 }

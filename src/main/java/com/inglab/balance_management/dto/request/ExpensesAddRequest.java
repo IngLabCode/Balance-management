@@ -1,18 +1,22 @@
 package com.inglab.balance_management.dto.request;
 
 
+import jakarta.validation.constraints.*;
+import lombok.Data;
+import java.time.LocalDate;
 
-import java.time.LocalDateTime;
+@Data
+public class ExpensesAddRequest {
 
-public record ExpensesAddRequest(Integer amount,
-                                 LocalDateTime date,
-                                 String description,
-                                 String paymentMethod) {
+    @NotNull(message = "Amount cannot be null")
+    @Positive(message = "Amount must be greater than zero")
+    private Double amount;
 
+    @NotNull(message = "Date cannot be null")
+    @FutureOrPresent(message = "Date must be in the present or future")
+    private LocalDate date;
 
-    public ExpensesAddRequest {
-        if (amount != null && amount < 0) {
-            throw new IllegalArgumentException("Amount cannot be negative");
-        }
-    }
+    @NotBlank(message = "Description cannot be blank")
+    @Size(max = 255, message = "Description must not exceed 255 characters")
+    private String description;
 }
