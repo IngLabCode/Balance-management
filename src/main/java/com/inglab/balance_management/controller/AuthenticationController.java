@@ -4,7 +4,7 @@ import com.inglab.balance_management.dto.request.AuthenticationRequest;
 import com.inglab.balance_management.dto.request.RegisterRequest;
 import com.inglab.balance_management.dto.response.AuthenticationResponse;
 import com.inglab.balance_management.repository.UserRepository;
-import com.inglab.balance_management.service.impl.AuthenticationService;
+import com.inglab.balance_management.service.impl.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private final AuthenticationService service;
+    private final AuthenticationServiceImpl service;
     private final UserRepository repository;
 
 

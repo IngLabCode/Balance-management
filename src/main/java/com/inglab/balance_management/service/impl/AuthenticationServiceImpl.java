@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class AuthenticationServiceImpl {
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -26,7 +26,7 @@ public class AuthenticationService {
     private final OTPServiceInter otpServiceInter;
 
 
-    public AuthenticationResponse register(RegisterRequest request) {
+        public AuthenticationResponse register(RegisterRequest request) {
         Role role;
         try {
             role = Role.valueOf(request.getRole().toUpperCase());
@@ -40,9 +40,9 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .isEnabled(true)
-                .isAccountNonExpired(true)
-                .isAccountNonLocked(true)
-                .isCredentialsNonExpired(true)
+//                .isAccountNonExpired(true)
+//                .isAccountNonLocked(true)
+//                .isCredentialsNonExpired(true)
                 .roles(Set.of(role))
                 .build();
 

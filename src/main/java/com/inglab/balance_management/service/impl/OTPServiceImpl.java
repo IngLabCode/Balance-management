@@ -34,7 +34,7 @@ public class OTPServiceImpl implements OTPServiceInter {
         String otp = UUID.randomUUID().toString();
 
         user.setOtp(otp);
-        user.setOtpExpiry(LocalDateTime.now().plusMinutes(10)); // 10 minutes expiry
+        user.setOtpExpiry(LocalDateTime.now().plusMinutes(10));
         repository.save(user);
 
         sendVerificationEmail(user.getEmail(), otp);

@@ -36,17 +36,17 @@ public class User implements UserDetails {
     private boolean verified;
     private String otp;
     private LocalDateTime otpExpiry;
-    @OneToMany(mappedBy = "user")
-    private List<IncomeCategory> incomeCategories;
-
-    @OneToMany(mappedBy = "user")
-    private List<ExpenseCategory> expenseCategories;
-
-    @OneToMany(mappedBy = "user")
-    private List<Incomes> incomes;
-
-    @OneToMany(mappedBy = "user")
-    private List<Expenses> expenses;
+//    @OneToMany(mappedBy = "user")
+//    private List<IncomeCategory> incomeCategories;
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<ExpenseCategory> expenseCategories;
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<Incomes> incomes;
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<Expenses> expenses;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
@@ -54,9 +54,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
     private boolean isEnabled;
-    private boolean isAccountNonExpired;
-    private boolean isAccountNonLocked;
-    private boolean isCredentialsNonExpired;
+//    private boolean isAccountNonExpired;
+//    private boolean isAccountNonLocked;
+//    private boolean isCredentialsNonExpired;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
